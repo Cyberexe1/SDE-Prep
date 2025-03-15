@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SDE Prep Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- Dashboard Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <i data-lucide="code" class="logo-icon"></i>
+            <span class="logo-text">SDE Prep</span>
+          </div>
+          <button id="logoutBtn" class="btn btn-primary">
+            <i data-lucide="log-out" class="btn-icon"></i>
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <h1 class="welcome-heading">Welcome back, <span id="userName">User</span>!</h1>
+        
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-section="overview">Overview</button>
+          <button class="tab-btn" data-section="coding">Coding Challenges</button>
+          <button class="tab-btn" data-section="interviews">Mock Interviews</button>
+          <button class="tab-btn" data-section="soft-skills">Soft Skills Training</button>
+        </div>
+        
+        <!-- Overview Section -->
+        <section id="overview" class="section active">
+          <div class="grid">
+            <!-- Study Plan Section -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <i data-lucide="book-open" class="card-icon"></i>
+                  <h2>Your Study Plan</h2>
+                </div>
+                <span class="text-muted">Daily Progress</span>
+              </div>
+              <div class="card-body">
+                <div id="studyPlanList" class="task-list">
+                  <!-- Study plan tasks will be inserted here by JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress Tracking Section -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <i data-lucide="bar-chart" class="card-icon"></i>
+                  <h2>Progress Overview</h2>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="progress-container">
+                  <div class="progress-header">
+                    <span>Challenges Completed</span>
+                    <span id="progressCount" class="font-medium">25/100</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                  </div>
+                </div>
+                
+                <div class="stats-grid">
+                  <div class="stat-card bg-indigo">
+                    <h3>Current Streak</h3>
+                    <p id="streakCount" class="stat-value">7 days</p>
+                  </div>
+                  <div class="stat-card bg-orange">
+                    <h3>Mock Tests</h3>
+                    <p id="mockTestCount" class="stat-value">2 pending</p>
+                  </div>
+                  <div class="stat-card bg-green">
+                    <h3>Interviews</h3>
+                    <p id="interviewCount" class="stat-value">1 upcoming</p>
+                  </div>
+                </div>
+
+                <div class="badges-container">
+                  <h3>Earned Badges</h3>
+                  <div id="badgesList" class="badges-list">
+                    <!-- Badges will be inserted here by JavaScript -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Applications Section -->
+            <div class="card full-width">
+              <div class="card-header">
+                <div class="card-title">
+                  <i data-lucide="calendar" class="card-icon"></i>
+                  <h2>Job Applications</h2>
+                </div>
+                <button id="addApplicationBtn" class="btn btn-primary">
+                  <i data-lucide="plus" class="btn-icon"></i>
+                  Add Application
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="table-container">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Next Step</th>
+                      </tr>
+                    </thead>
+                    <tbody id="applicationsTable">
+                      <!-- Applications will be inserted here by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Coding Challenges Section -->
+        <section id="coding" class="section">
+          <div class="card full-width">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="code" class="card-icon"></i>
+                <h2>Coding Challenges</h2>
+              </div>
+              <button id="toggleFiltersBtn" class="btn btn-secondary">
+                <i data-lucide="filter" class="btn-icon"></i>
+                Filters
+              </button>
+            </div>
+            <div class="card-body">
+              <div id="filtersContainer" class="filters-container" style="display: none;">
+                <div class="filters-grid">
+                  <div>
+                    <h3>Difficulty</h3>
+                    <div class="filter-options">
+                      <button class="filter-btn" data-difficulty="Easy">Easy</button>
+                      <button class="filter-btn" data-difficulty="Medium">Medium</button>
+                      <button class="filter-btn" data-difficulty="Hard">Hard</button>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3>Topics</h3>
+                    <div class="filter-options scrollable">
+                      <button class="filter-btn" data-topic="Arrays">Arrays</button>
+                      <button class="filter-btn" data-topic="Strings">Strings</button>
+                      <button class="filter-btn" data-topic="Hash Table">Hash Table</button>
+                      <button class="filter-btn" data-topic="Linked List">Linked List</button>
+                      <button class="filter-btn" data-topic="Stack">Stack</button>
+                      <button class="filter-btn" data-topic="Queue">Queue</button>
+                      <button class="filter-btn" data-topic="Tree">Tree</button>
+                      <button class="filter-btn" data-topic="Graph">Graph</button>
+                      <button class="filter-btn" data-topic="Dynamic Programming">Dynamic Programming</button>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3>Companies</h3>
+                    <div class="filter-options scrollable">
+                      <button class="filter-btn" data-company="Google">Google</button>
+                      <button class="filter-btn" data-company="Amazon">Amazon</button>
+                      <button class="filter-btn" data-company="Microsoft">Microsoft</button>
+                      <button class="filter-btn" data-company="Facebook">Facebook</button>
+                      <button class="filter-btn" data-company="Apple">Apple</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="search-container">
+                  <input type="text" id="problemSearch" placeholder="Search problems..." class="search-input">
+                </div>
+              </div>
+
+              <div class="coding-grid">
+                <!-- Problem List -->
+                <div class="problem-list-container">
+                  <div class="problem-list-header">
+                    <h3>Problems (<span id="problemCount">5</span>)</h3>
+                  </div>
+                  <div id="problemList" class="problem-list">
+                    <!-- Problems will be inserted here by JavaScript -->
+                  </div>
+                </div>
+
+                <!-- Problem Details and Code Editor -->
+                <div class="problem-details-container">
+                  <div id="problemPlaceholder" class="problem-placeholder">
+                    <i data-lucide="trophy" class="placeholder-icon"></i>
+                    <h3>Select a Problem</h3>
+                    <p>Choose a coding challenge from the list to start solving</p>
+                  </div>
+                  
+                  <div id="problemDetails" class="problem-details" style="display: none;">
+                    <div class="problem-header">
+                      <h3 id="problemTitle">Problem Title</h3>
+                    </div>
+                    
+                    <div class="problem-description">
+                      <p id="problemDescription">Problem description will appear here.</p>
+                      <div id="problemTopics" class="problem-tags">
+                        <!-- Topics will be inserted here by JavaScript -->
+                      </div>
+                      <div id="problemCompanies" class="problem-tags">
+                        <!-- Companies will be inserted here by JavaScript -->
+                      </div>
+                    </div>
+                    
+                    <div class="code-editor-container">
+                      <div class="editor-toolbar">
+                        <select id="languageSelect" class="language-select">
+                          <option value="javascript">JavaScript</option>
+                          <option value="python">Python</option>
+                          <option value="java">Java</option>
+                          <option value="cpp">C++</option>
+                          <option value="go">Go</option>
+                        </select>
+                        <div class="editor-actions">
+                          <button id="runCodeBtn" class="btn btn-primary">
+                            <i data-lucide="play" class="btn-icon"></i>
+                            Run
+                          </button>
+                          <button id="submitCodeBtn" class="btn btn-success">
+                            <i data-lucide="check" class="btn-icon"></i>
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <textarea id="codeEditor" class="code-editor" spellcheck="false">// Write your code here</textarea>
+                      
+                      <div id="testResults" class="test-results" style="display: none;">
+                        <!-- Test results will be inserted here by JavaScript -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Mock Interviews Section -->
+        <section id="interviews" class="section">
+          <div class="card full-width">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="message-square" class="card-icon"></i>
+                <h2>Mock Interviews</h2>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Interview Tabs -->
+              <div class="subtabs">
+                <button class="subtab-btn active" data-tab="upcoming">Upcoming Interviews</button>
+                <button class="subtab-btn" data-tab="question-bank">Question Bank</button>
+                <button class="subtab-btn" data-tab="feedback">Feedback & History</button>
+              </div>
+              
+              <!-- Upcoming Interviews Tab -->
+              <div id="upcoming" class="subtab-content active">
+                <div class="section-block">
+                  <h3>Scheduled Interviews</h3>
+                  <div id="scheduledInterviews" class="interview-list">
+                    <!-- Scheduled interviews will be inserted here by JavaScript -->
+                  </div>
+                </div>
+
+                <div class="section-block">
+                  <h3>Available Interview Types</h3>
+                  <div class="interview-types-grid">
+                    <div class="interview-type-card">
+                      <div class="interview-type-header">
+                        <i data-lucide="mic" class="interview-type-icon purple"></i>
+                        <h4>AI-Powered Interview</h4>
+                      </div>
+                      <p>Practice with our AI interviewer that adapts to your responses and provides instant feedback.</p>
+                      <button class="btn btn-purple schedule-btn">Schedule</button>
+                    </div>
+                    <div class="interview-type-card">
+                      <div class="interview-type-header">
+                        <i data-lucide="users" class="interview-type-icon blue"></i>
+                        <h4>Peer Interview</h4>
+                      </div>
+                      <p>Connect with another student for a mock interview session and exchange feedback.</p>
+                      <button class="btn btn-blue schedule-btn">Find a Partner</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Question Bank Tab -->
+              <div id="question-bank" class="subtab-content">
+                <div class="filters-row">
+                  <div>
+                    <label>Question Type</label>
+                    <select id="questionTypeSelect" class="select-input">
+                      <option value="all">All Types</option>
+                      <option value="technical">Technical</option>
+                      <option value="behavioral">Behavioral</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>Difficulty</label>
+                    <select id="questionDifficultySelect" class="select-input">
+                      <option value="all">All Levels</option>
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard">Hard</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div id="questionsList" class="questions-list">
+                  <!-- Questions will be inserted here by JavaScript -->
+                </div>
+              </div>
+              
+              <!-- Feedback Tab -->
+              <div id="feedback" class="subtab-content">
+                <h3>Interview History</h3>
+                <div id="interviewHistory" class="interview-history">
+                  <!-- Interview history will be inserted here by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Soft Skills Training Section -->
+        <section id="soft-skills" class="section">
+          <div class="card full-width">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="award" class="card-icon"></i>
+                <h2>Soft Skills Training</h2>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Soft Skills Tabs -->
+              <div class="subtabs">
+                <button class="subtab-btn active" data-tab="exercises">Exercises & Quizzes</button>
+                <button class="subtab-btn" data-tab="profile-review">Profile Review</button>
+              </div>
+              
+              <!-- Exercises Tab -->
+              <div id="exercises" class="subtab-content active">
+                <div class="categories-grid">
+                  <button class="category-btn" data-category="communication">
+                    <i data-lucide="message-circle" class="category-icon"></i>
+                    <span>Communication</span>
+                  </button>
+                  <button class="category-btn" data-category="teamwork">
+                    <i data-lucide="users" class="category-icon"></i>
+                    <span>Teamwork</span>
+                  </button>
+                  <button class="category-btn" data-category="problem-solving">
+                    <i data-lucide="brain" class="category-icon"></i>
+                    <span>Problem Solving</span>
+                  </button>
+                  <button class="category-btn" data-category="leadership">
+                    <i data-lucide="briefcase" class="category-icon"></i>
+                    <span>Leadership</span>
+                  </button>
+                </div>
+
+                <div id="exercisesList" class="exercises-list">
+                  <!-- Exercises will be inserted here by JavaScript -->
+                </div>
+              </div>
+              
+              <!-- Profile Review Tab -->
+              <div id="profile-review" class="subtab-content">
+                <div class="review-types-grid">
+                  <div class="review-type-card">
+                    <div class="review-type-header">
+                      <i data-lucide="file-text" class="review-type-icon indigo"></i>
+                      <h3>Resume Review</h3>
+                    </div>
+                    <p>Get professional feedback on your resume from our AI-powered tool and career experts.</p>
+                    <button class="btn btn-primary review-type-btn" data-type="resume">Upload Resume</button>
+                  </div>
+                  <div class="review-type-card">
+                    <div class="review-type-header">
+                      <i data-lucide="briefcase" class="review-type-icon blue"></i>
+                      <h3>LinkedIn Profile Review</h3>
+                    </div>
+                    <p>Optimize your LinkedIn profile with personalized recommendations to attract recruiters.</p>
+                    <button class="btn btn-blue review-type-btn" data-type="linkedin">Upload Screenshot</button>
+                  </div>
+                </div>
+
+                <div class="upload-container">
+                  <h3 id="uploadTitle">Resume Review</h3>
+                  <div class="file-upload">
+                    <label>Upload your resume (PDF)</label>
+                    <div class="dropzone">
+                      <p>Drag and drop your file here, or click to select</p>
+                      <input type="file" id="fileUpload" class="file-input">
+                      <button class="btn btn-secondary">Select File</button>
+                    </div>
+                  </div>
+                  <button id="submitReviewBtn" class="btn btn-primary full-width" disabled>Submit for Review</button>
+                </div>
+
+                <div class="section-block">
+                  <h3>Previous Reviews</h3>
+                  <div id="previousReviews" class="reviews-list">
+                    <!-- Previous reviews will be inserted here by JavaScript -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="scheduleModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Schedule Interview</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="scheduleDate" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <input type="time" id="scheduleTime" class="form-input">
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-secondary cancel-btn">Cancel</button>
+            <button class="btn btn-primary confirm-btn">Schedule</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="addApplicationModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Application</h3>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" id="companyInput" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <input type="text" id="roleInput" class="form-input" required>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-secondary cancel-btn">Cancel</button>
+            <button id="addApplicationConfirmBtn" class="btn btn-primary confirm-btn">Add Application</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
