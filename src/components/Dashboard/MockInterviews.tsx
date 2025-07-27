@@ -77,6 +77,90 @@ const mockQuestions: InterviewQuestion[] = [
     type: 'technical',
     difficulty: 'hard',
     sampleAnswer: 'I would design a system with a web server, application logic, and database. The core functionality would involve generating a unique short code for each URL using techniques like hashing or base62 encoding. The system would need to handle high read throughput, so I would implement caching and potentially a NoSQL database for storage.'
+  },
+  {
+    id: '4',
+    question: 'What is the difference between process and thread?',
+    type: 'technical',
+    difficulty: 'medium',
+    sampleAnswer: 'A process is an instance of a program execution with its own memory space, while a thread is a lightweight execution unit within a process that shares the same memory space with other threads in the same process. Processes are isolated from each other, while threads can communicate more easily but require synchronization mechanisms to avoid race conditions.'
+  },
+  {
+    id: '5',
+    question: 'Describe a situation where you had to resolve a conflict within your team.',
+    type: 'behavioral',
+    difficulty: 'medium',
+    sampleAnswer: 'In my previous role, two team members had different approaches to implementing a feature, which led to tension. I organized a meeting where both could present their ideas, facilitated a discussion of pros and cons, and helped the team reach a consensus by combining the best aspects of both approaches. This experience taught me the value of active listening and finding common ground.'
+  },
+  {
+    id: '6',
+    question: 'Explain the concept of database normalization and its benefits.',
+    type: 'technical',
+    difficulty: 'medium',
+    sampleAnswer: 'Database normalization is the process of structuring a relational database to reduce data redundancy and improve data integrity. It involves organizing fields and tables to minimize dependency and redundancy by dividing large tables into smaller ones and defining relationships. Benefits include reduced storage space, better performance for certain queries, and elimination of anomalies that could lead to inconsistent data.'
+  },
+  {
+    id: '7',
+    question: 'Tell me about a time when you received critical feedback and how you responded to it.',
+    type: 'behavioral',
+    difficulty: 'medium',
+    sampleAnswer: 'During a code review, a senior developer pointed out that my solution was inefficient and would not scale well. Initially, I felt defensive, but I took time to understand their perspective. I asked for specific suggestions, researched better approaches, and implemented an improved solution. I now actively seek feedback earlier in the development process and view it as an opportunity for growth rather than criticism.'
+  },
+  {
+    id: '8',
+    question: 'What are promises in JavaScript and how do they work?',
+    type: 'technical',
+    difficulty: 'easy',
+    sampleAnswer: 'Promises in JavaScript are objects representing the eventual completion or failure of an asynchronous operation. They allow you to write asynchronous code in a more manageable way compared to callbacks. A promise has three states: pending, fulfilled, or rejected. You can chain promises using .then() for success cases and .catch() for error handling, making asynchronous code more readable and maintainable.'
+  },
+  {
+    id: '9',
+    question: 'Describe a situation where you had to learn a new technology or skill quickly.',
+    type: 'behavioral',
+    difficulty: 'easy',
+    sampleAnswer: 'When my team needed to implement a new feature using GraphQL, which none of us had experience with, I volunteered to lead the learning effort. I created a structured learning plan, including official documentation, tutorials, and small practice projects. Within two weeks, I was able to implement a basic prototype and share my knowledge with the team through a workshop. This approach allowed us to deliver the feature on time while building valuable team expertise.'
+  },
+  {
+    id: '10',
+    question: 'Explain the concept of time and space complexity in algorithms.',
+    type: 'technical',
+    difficulty: 'medium',
+    sampleAnswer: 'Time complexity measures how the runtime of an algorithm grows as the input size increases, while space complexity measures the amount of memory an algorithm needs. Both are typically expressed using Big O notation. For example, an algorithm with O(n) time complexity has a linear relationship between input size and runtime, while O(n²) indicates quadratic growth. When designing algorithms, we often need to balance these complexities, sometimes trading memory for speed or vice versa depending on the constraints.'
+  },
+  {
+    id: '11',
+    question: 'How would you design a distributed cache system?',
+    type: 'technical',
+    difficulty: 'hard',
+    sampleAnswer: 'I would design a distributed cache with a consistent hashing mechanism to distribute data across multiple nodes, ensuring scalability and fault tolerance. The system would include features like data partitioning, replication for redundancy, a TTL (Time-To-Live) mechanism for cache invalidation, and an eviction policy like LRU. I would implement a monitoring system to track hit/miss ratios and latency. For consistency, I might use techniques like write-through or write-behind caching depending on the specific requirements for data freshness versus performance.'
+  },
+  {
+    id: '12',
+    question: 'Tell me about a time when you had to make a difficult decision with limited information.',
+    type: 'behavioral',
+    difficulty: 'hard',
+    sampleAnswer: 'During a critical production issue, I had to decide whether to roll back a major feature release or attempt a fix with limited understanding of the root cause. With the system partially down and only fragmented error logs, I quickly gathered the available data, consulted with team members who had context on different components, and evaluated the risks of both options. I decided to implement a targeted fix rather than a full rollback, which proved successful. This experience taught me to establish better monitoring and create a structured decision-making framework for emergency situations.'
+  },
+  {
+    id: '13',
+    question: 'Explain the CAP theorem and its implications for distributed systems.',
+    type: 'technical',
+    difficulty: 'hard',
+    sampleAnswer: 'The CAP theorem states that a distributed system cannot simultaneously provide all three of the following guarantees: Consistency (all nodes see the same data at the same time), Availability (every request receives a response), and Partition tolerance (the system continues to operate despite network failures). In practice, when a network partition occurs, you must choose between consistency and availability. Systems like traditional RDBMS prioritize consistency, while NoSQL databases like Cassandra prioritize availability. Understanding these trade-offs is crucial when designing distributed systems based on specific business requirements.'
+  },
+  {
+    id: '14',
+    question: 'Describe a situation where you demonstrated leadership without having a formal leadership role.',
+    type: 'behavioral',
+    difficulty: 'hard',
+    sampleAnswer: 'When our team was struggling with an increasing number of bugs and technical debt, despite not being a team lead, I took initiative by analyzing patterns in our defects and creating a proposal for addressing root causes. I organized voluntary brown bag sessions to discuss code quality practices and volunteered to create a starter template for unit tests. By focusing on collaboration rather than criticism, I was able to get buy-in from both developers and management. Over three months, we reduced new defects by 40% and established better development practices that the team continues to follow.'
+  },
+  {
+    id: '15',
+    question: 'What is the difference between REST and GraphQL APIs?',
+    type: 'technical',
+    difficulty: 'medium',
+    sampleAnswer: 'REST APIs use standard HTTP methods and typically have multiple endpoints for different resources, while GraphQL provides a single endpoint where clients can specify exactly what data they need. REST often results in over-fetching or under-fetching data, requiring multiple requests for complex data needs. GraphQL solves this by allowing clients to request precisely the data they need in a single request. However, GraphQL has a steeper learning curve, can be more complex to implement on the server side, and may have performance challenges with deeply nested queries that REST APIs might handle more efficiently with purpose-built endpoints.'
   }
 ];
 
@@ -92,7 +176,6 @@ export function MockInterviews() {
 
   const upcomingInterviews = mockInterviews.filter(interview => interview.status === 'scheduled');
   const completedInterviews = mockInterviews.filter(interview => interview.status === 'completed');
-  const availableInterviews = mockInterviews.filter(interview => interview.status === 'available');
 
   const filteredQuestions = mockQuestions.filter(question => {
     if (selectedQuestionType !== 'all' && question.type !== selectedQuestionType) {
@@ -426,4 +509,4 @@ export function MockInterviews() {
       )}
     </div>
   );
-} 
+}
