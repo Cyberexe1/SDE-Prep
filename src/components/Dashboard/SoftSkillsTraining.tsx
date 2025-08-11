@@ -57,6 +57,61 @@ const mockExercises: Exercise[] = [
           'Escalate to management immediately'
         ],
         correctAnswer: 2
+      },
+      {
+        id: 'q3',
+        text: 'When explaining a complex technical concept to a non-technical stakeholder, what approach is most effective?',
+        options: [
+          'Use technical jargon to demonstrate expertise',
+          'Simplify concepts using analogies and visual aids',
+          'Provide extensive technical documentation',
+          'Delegate the explanation to someone else'
+        ],
+        correctAnswer: 1
+      },
+      {
+        id: 'q4',
+        text: 'Which communication method is most appropriate for delivering critical feedback?',
+        options: [
+          'Email or text message',
+          'Public team meeting',
+          'Private face-to-face conversation',
+          'Through a third party'
+        ],
+        correctAnswer: 2
+      },
+      {
+        id: 'q5',
+        text: 'What is the most effective way to handle interruptions during a presentation?',
+        options: [
+          'Ignore the person interrupting and continue speaking',
+          'Ask them to save questions for the end and continue immediately',
+          'Address their point briefly and establish when questions will be taken',
+          'Stop the presentation to have an extended discussion'
+        ],
+        correctAnswer: 2
+      },
+      {
+        id: 'q6',
+        text: 'Which of the following is most important when communicating project delays to stakeholders?',
+        options: [
+          'Providing detailed technical explanations for the delay',
+          'Assigning blame to specific team members or departments',
+          'Communicating early with transparency and a mitigation plan',
+          'Minimizing the significance of the delay'
+        ],
+        correctAnswer: 2
+      },
+      {
+        id: 'q7',
+        text: 'What is the best approach when you don\'t know the answer to a question during a client meeting?',
+        options: [
+          'Make an educated guess and present it as fact',
+          'Acknowledge you don\'t know, but commit to finding the answer',
+          'Deflect by changing the subject',
+          'Pretend you didn\'t hear the question'
+        ],
+        correctAnswer: 1
       }
     ]
   },
@@ -82,6 +137,14 @@ const mockExercises: Exercise[] = [
     type: 'quiz',
     category: 'leadership',
     description: 'Discover your natural leadership style and learn how to adapt it to different situations.',
+    completed: false
+  },
+  {
+    id: '5',
+    title: 'Technical Communication Scenarios',
+    type: 'interactive',
+    category: 'communication',
+    description: 'Practice explaining complex technical concepts clearly and effectively through interactive scenarios.',
     completed: false
   }
 ];
@@ -535,4 +598,4 @@ export function SoftSkillsTraining() {
       )}
     </div>
   );
-} 
+}

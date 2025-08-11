@@ -9,8 +9,40 @@ interface FeatureCardProps {
 }
 
 function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
+  const handleClick = () => {
+    // Determine which section to navigate to based on the feature title
+    let path = '/dashboard';
+    let section = '';
+    
+    switch(title) {
+      case 'Coding Practice':
+        section = 'coding';
+        break;
+      case 'Mock Interviews':
+        section = 'interviews';
+        break;
+      case 'Application Tracker':
+        section = 'overview'; // This will show the job applications section
+        break;
+      case 'Progress Analytics':
+        section = 'overview'; // This will show the progress tracking section
+        break;
+      case 'AI-Powered Learning':
+      case 'Expert Mentorship':
+      default:
+        section = 'overview';
+        break;
+    }
+    
+    // Navigate to the dashboard with the appropriate section
+    window.location.href = `${path}?section=${section}`;
+  };
+  
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <div 
+      className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" 
+      onClick={handleClick}
+    >
       <div className="flex items-center mb-4">
         <Icon className="w-6 h-6 text-indigo-600" />
         <h3 className="ml-3 text-lg font-semibold">{title}</h3>
@@ -27,8 +59,17 @@ interface DeveloperCardProps {
 }
 
 function DeveloperCard({ name, role, image }: DeveloperCardProps) {
+  const handleClick = () => {
+    // In a real app, this would navigate to the developer's profile
+    // For now, we'll just show an alert with their info
+    alert(`${name} - ${role}\nContact this developer for more information about the platform.`);
+  };
+  
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div 
+      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:scale-105 transition-transform"
+      onClick={handleClick}
+    >
       <img src={image} alt={name} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h3 className="font-semibold text-lg">{name}</h3>
@@ -185,37 +226,37 @@ export function HomePage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Platform</h3>
               <ul className="space-y-2">
-                <li>Features</li>
-                <li>Pricing</li>
-                <li>Testimonials</li>
-                <li>FAQ</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Features page coming soon!')}>Features</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Pricing information coming soon!')}>Pricing</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Testimonials coming soon!')}>Testimonials</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('FAQ page coming soon!')}>FAQ</li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4">Resources</h3>
               <ul className="space-y-2">
-                <li>Blog</li>
-                <li>Documentation</li>
-                <li>Community</li>
-                <li>Support</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Blog coming soon!')}>Blog</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Documentation coming soon!')}>Documentation</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Community page coming soon!')}>Community</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Support page coming soon!')}>Support</li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4">Company</h3>
               <ul className="space-y-2">
-                <li>About Us</li>
-                <li>Careers</li>
-                <li>Contact</li>
-                <li>Privacy Policy</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('About Us page coming soon!')}>About Us</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Careers page coming soon!')}>Careers</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Contact page coming soon!')}>Contact</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => alert('Privacy Policy coming soon!')}>Privacy Policy</li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4">Connect</h3>
               <ul className="space-y-2">
-                <li>Twitter</li>
-                <li>LinkedIn</li>
-                <li>GitHub</li>
-                <li>Discord</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => window.open('https://twitter.com', '_blank')}>Twitter</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => window.open('https://linkedin.com', '_blank')}>LinkedIn</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => window.open('https://github.com', '_blank')}>GitHub</li>
+                <li className="cursor-pointer hover:text-indigo-300 transition-colors" onClick={() => window.open('https://discord.com', '_blank')}>Discord</li>
               </ul>
             </div>
           </div>
@@ -226,4 +267,4 @@ export function HomePage() {
       </footer>
     </div>
   );
-} 
+}

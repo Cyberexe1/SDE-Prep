@@ -57,6 +57,96 @@ const mockProblems: Problem[] = [
     description: 'Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.',
     solved: false
   },
+  {
+    id: '6',
+    title: 'Maximum Subarray',
+    difficulty: 'Easy',
+    topics: ['Arrays', 'Dynamic Programming', 'Divide and Conquer'],
+    companies: ['Apple', 'Microsoft', 'Amazon'],
+    description: 'Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.',
+    solved: false
+  },
+  {
+    id: '7',
+    title: 'Binary Tree Level Order Traversal',
+    difficulty: 'Medium',
+    topics: ['Tree', 'Breadth-First Search', 'Binary Tree'],
+    companies: ['Amazon', 'Microsoft', 'Facebook'],
+    description: 'Given the root of a binary tree, return the level order traversal of its nodes\'s values (i.e., from left to right, level by level).',
+    solved: false
+  },
+  {
+    id: '8',
+    title: 'Longest Palindromic Substring',
+    difficulty: 'Medium',
+    topics: ['String', 'Dynamic Programming'],
+    companies: ['Amazon', 'Microsoft', 'Google'],
+    description: 'Given a string s, return the longest palindromic substring in s.',
+    solved: false
+  },
+  {
+    id: '9',
+    title: 'Median of Two Sorted Arrays',
+    difficulty: 'Hard',
+    topics: ['Arrays', 'Binary Search', 'Divide and Conquer'],
+    companies: ['Google', 'Amazon', 'Apple'],
+    description: 'Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.',
+    solved: false
+  },
+  {
+    id: '10',
+    title: 'Word Break',
+    difficulty: 'Medium',
+    topics: ['Dynamic Programming', 'Hash Table', 'String'],
+    companies: ['Facebook', 'Amazon', 'Google'],
+    description: 'Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.',
+    solved: false
+  },
+  {
+    id: '11',
+    title: 'Course Schedule',
+    difficulty: 'Medium',
+    topics: ['Graph', 'Topological Sort', 'Depth-First Search'],
+    companies: ['Amazon', 'Google', 'Facebook'],
+    description: 'There are a total of numCourses courses you have to take, labeled from 0 to numCourses-1. Some courses may have prerequisites. Return true if you can finish all courses.',
+    solved: false
+  },
+  {
+    id: '12',
+    title: 'Serialize and Deserialize Binary Tree',
+    difficulty: 'Hard',
+    topics: ['Tree', 'Depth-First Search', 'Binary Tree', 'Design'],
+    companies: ['Facebook', 'Amazon', 'Microsoft'],
+    description: 'Design an algorithm to serialize and deserialize a binary tree. Serialization is the process of converting a data structure into a sequence of bits so that it can be stored in a file or memory buffer.',
+    solved: false
+  },
+  {
+    id: '13',
+    title: 'Rotate Image',
+    difficulty: 'Medium',
+    topics: ['Arrays', 'Math', 'Matrix'],
+    companies: ['Amazon', 'Microsoft', 'Apple'],
+    description: 'You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).',
+    solved: false
+  },
+  {
+    id: '14',
+    title: 'Climbing Stairs',
+    difficulty: 'Easy',
+    topics: ['Dynamic Programming', 'Math', 'Memoization'],
+    companies: ['Amazon', 'Google', 'Apple'],
+    description: 'You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?',
+    solved: false
+  },
+  {
+    id: '15',
+    title: 'Minimum Window Substring',
+    difficulty: 'Hard',
+    topics: ['Hash Table', 'String', 'Sliding Window'],
+    companies: ['Facebook', 'Amazon', 'Google'],
+    description: 'Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window.',
+    solved: false
+  },
 ];
 
 const topics = ['Arrays', 'Strings', 'Hash Table', 'Linked List', 'Stack', 'Queue', 'Tree', 'Graph', 'Dynamic Programming', 'Greedy', 'Binary Search', 'Sorting'];
@@ -406,4 +496,4 @@ export function CodingChallenges() {
       </div>
     </div>
   );
-} 
+}
