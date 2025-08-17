@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Code, Filter, Play, Check, X, Trophy } from 'lucide-react';
+import { useState } from 'react';
+import { Code, Filter, Play, Check, X, Trophy, Copy, CheckCheck, Sparkles } from 'lucide-react';
+// Colorful code editor + syntax highlighting
+import Editor from 'react-simple-code-editor';
+import Highlight, { defaultProps } from 'prism-react-renderer';
 
 interface Problem {
   id: string;
@@ -159,10 +162,21 @@ export function CodingChallenges() {
   const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
-  const [code, setCode] = useState('// Write your code here');
+  const [code, setCode] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('JavaScript');
   const [showFilters, setShowFilters] = useState(false);
   const [testResults, setTestResults] = useState<null | { passed: boolean; message: string }>(null);
+  const [copied, setCopied] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(true);
+
+  // Map UI language to prism-react-renderer language id
+  const prismLang = {
+    JavaScript: 'javascript',
+    Python: 'python',
+    Java: 'java',
+    'C++': 'cpp',
+    Go: 'go',
+  } as const;
 
   const toggleDifficulty = (difficulty: string) => {
     if (selectedDifficulty.includes(difficulty)) {
@@ -241,8 +255,12 @@ export function CodingChallenges() {
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <Code className="w-6 h-6 text-indigo-600 mr-2" />
-          <h2 className="text-xl font-semibold">Coding Challenges</h2>
+          <div className="p-2 rounded-md bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-orange-400 text-white mr-2">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <h2 className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-orange-500">
+            Coding Challenges
+          </h2>
         </div>
         <button
           onClick={() => setShowFilters(!showFilters)}
@@ -426,7 +444,7 @@ export function CodingChallenges() {
               </div>
               
               <div className="p-4 border-b">
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex flex-wrap gap-2 justify-between items-center mb-3">
                   <select
                     value={selectedLanguage}
                     onChange={(e) => setSelectedLanguage(e.target.value)}
@@ -438,7 +456,26 @@ export function CodingChallenges() {
                       </option>
                     ))}
                   </select>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
+                    <button
+                      onClick={() => setDarkTheme(!darkTheme)}
+                      className="px-3 py-1 rounded-md text-sm border border-gray-200 hover:bg-gray-50"
+                      title="Toggle theme"
+                    >
+                      {darkTheme ? 'Dark' : 'Light'}
+                    </button>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(code).then(() => {
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 1200);
+                        });
+                      }}
+                      className="flex items-center px-3 py-1 bg-amber-100 text-amber-900 rounded-md hover:bg-amber-200 transition-colors text-sm"
+                    >
+                      {copied ? <CheckCheck className="w-3 h-3 mr-1" /> : <Copy className="w-3 h-3 mr-1" />}
+                      {copied ? 'Copied' : 'Copy'}
+                    </button>
                     <button
                       onClick={runCode}
                       className="flex items-center px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm"
@@ -455,14 +492,89 @@ export function CodingChallenges() {
                     </button>
                   </div>
                 </div>
-                
+                {/* Colorful syntax-highlighted editor */}
                 <div className="border rounded-md overflow-hidden">
-                  <textarea
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    className="w-full h-48 p-3 font-mono text-sm focus:outline-none"
-                    spellCheck="false"
-                  />
+                  <div
+                    className={`relative ${darkTheme ? 'bg-[#011627]' : 'bg-[#faf8f5]'} rse-container`}
+                  >
+                    {/* Global style sync to prevent any pixel offsets between layers */}
+                    <style>{`
+                      .rse-container {
+                        font-family: Consolas, 'Courier New', monospace;
+                        font-size: 14px;
+                        line-height: 20px;
+                        letter-spacing: 0px;
+                        color: ${darkTheme ? '#d6deeb' : '#5c6a72'};
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        font-variant-ligatures: none;
+                        font-feature-settings: "liga" 0, "calt" 0;
+                        box-sizing: border-box;
+                      }
+                      .rse-container *, .rse-container pre, .rse-container textarea {
+                        font: inherit !important;
+                        line-height: inherit !important;
+                        letter-spacing: inherit !important;
+                        box-sizing: inherit !important;
+                        tab-size: 2;
+                        -moz-tab-size: 2;
+                        white-space: pre;
+                      }
+                      .rse-container pre {
+                        margin: 0 !important;
+                        /* allow Editor's inline padding to apply */
+                        background: transparent !important;
+                        line-height: 20px !important;
+                      }
+                      .rse-container textarea.rse-textarea {
+                        color: inherit !important;
+                        caret-color: ${darkTheme ? '#d6deeb' : '#111827'} !important;
+                        background: transparent !important;
+                        line-height: 20px !important;
+                        /* no explicit padding; Editor handles it */
+                      }
+                    `}</style>
+                    <Editor
+                      value={code}
+                      onValueChange={setCode}
+                      preClassName="rse-pre"
+                      tabSize={2}
+                      insertSpaces
+                      padding={16}
+                      className="text-sm font-mono min-h-[12rem] outline-none"
+                      textareaClassName="rse-textarea"
+                      style={{
+                        color: darkTheme ? '#d6deeb' : '#5c6a72',
+                        caretColor: darkTheme ? '#d6deeb' : '#111827',
+                        fontFamily: "Consolas, 'Courier New', monospace",
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        letterSpacing: '0px',
+                        fontVariantLigatures: 'none',
+                        fontFeatureSettings: '"liga" 0, "calt" 0',
+                      }}
+                      highlight={(codeStr) => (
+                        <Highlight
+                          {...defaultProps}
+                          theme={darkTheme ? defaultProps.theme : undefined}
+                          code={codeStr}
+                          language={prismLang[selectedLanguage as keyof typeof prismLang] as any}
+                        >
+                          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                            <pre className={`${className} m-0 p-0`} style={{ ...style, lineHeight: '20px' }}>
+                              {tokens.map((line, i) => (
+                                <div key={i} {...getLineProps({ line })} className="px-0">
+                                  {line.map((token, key) => (
+                                    <span key={key} {...getTokenProps({ token })} />
+                                  ))}
+                                </div>
+                              ))}
+                            </pre>
+                          )}
+                        </Highlight>
+                      )}
+                    />
+                  </div>
                 </div>
                 
                 {testResults && (
