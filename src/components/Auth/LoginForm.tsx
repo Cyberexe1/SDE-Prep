@@ -34,7 +34,7 @@ export function LoginForm() {
             Your journey to software engineering excellence starts here
           </p>
           <p className="mt-1 text-center text-xs text-indigo-600 font-medium">
-            Default credentials: demo_user / password123
+            Default credentials: demo_user / password@123#
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

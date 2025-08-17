@@ -18,7 +18,7 @@ const DEFAULT_USER: User = {
   email: "demo@example.com"
 };
 
-const DEFAULT_PASSWORD = "password123";
+const DEFAULT_PASSWORD = "password@123#";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
