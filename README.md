@@ -150,15 +150,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Om Singh - Backend Engineer
 - Vikas Tiwari - UI/UX Designer
 
-## 📞 Contact
 
-If you have any questions or feedback, please reach out to us at:
-
-- Email: contact@sdeprep.com
-- Twitter: [@SDEPrep](https://twitter.com/sdeprep)
-- LinkedIn: [SDE Prep](https://linkedin.com/company/sdeprep)
-
----
 
 <div align="center">
   <p>Made with ❤️ for aspiring software engineers</p>
